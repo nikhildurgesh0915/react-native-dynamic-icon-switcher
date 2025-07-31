@@ -1,18 +1,39 @@
-# 🔄 React Native App with Remote Icon Switching (Android Only)
+# 🔄 React Native App with Remote Icon & App Name Switching (Android Only)
 
-This is a React Native Android app that allows **dynamic app icon switching remotely via Firebase Remote Config**. By using Firebase, you can control which launcher icon appears on users’ devices — without requiring a new app update or user interaction.
+This is a React Native Android app that enables **dynamic app icon and app name switching remotely via Firebase Remote Config**. Firebase allows control over what launcher icon and label users see — all without requiring an app update or user interaction.
 
-> 📌 **Note**: This feature is currently supported only on Android.
-iOS support is not available yet but will be implemented in future updates.
+> 📌 **Note**: This feature is currently supported only on Android.  
+> iOS support is not available yet but will be implemented in future updates.
 
 ---
 
 ## ✨ Features
 
-- 🔧 **Remote Control**: Manage app icon dynamically using Firebase Remote Config.
-- 🚀 **No App Update Needed**: Change the icon remotely without uploading a new build.
-- 🎨 **Multiple Icon Variants**: Easily support multiple themes (e.g., festival, sale, etc.) via alias icons.
+- 🔧 **Remote Control**: Manage app icon and label dynamically using Firebase Remote Config.
+- 🚀 **No App Update Needed**: Switch icon and app name remotely without uploading a new build.
+- 🎨 **Multiple Icon Variants**: Easily support seasonal themes or branding (e.g., festivals, promotions).
+- 🔤 **Dynamic App Name Support**: App name displayed on launcher updates along with the icon.
 - 🔥 Built with React Native and integrated with Firebase.
+
+---
+
+## 🔧 Firebase Remote Config Setup
+
+1. Open [Firebase Console](https://console.firebase.google.com/)
+2. Select or create a Firebase project
+3. Navigate to **Remote Config**
+4. Add a new parameter:
+   - **Key**: `icon_name`
+   - **Value**: e.g., `MainActivityDefault`, `MainActivityPromo`, `MainActivityFestival` (must match alias names in manifest)
+5. Publish the config
+
+## 📖 Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/nikhildurgesh0915/react-native-dynamic-icon-switcher.git
+cd react-native-dynamic-icon-switcher
 
 ---
 
@@ -47,20 +68,6 @@ npx react-native run-android
 
 ---
 
-## 🔧 Firebase Remote Config Setup
-
-1. Open [Firebase Console](https://console.firebase.google.com/)
-2. Select or create a Firebase project
-3. Navigate to **Remote Config**
-4. Add a new parameter:
-   - **Key**: `icon_name`
-   - **Value**: e.g., `MainActivityDefault`, `MainActivityPromo`, `MainActivityFestival` (must match alias names in manifest)
-5. Publish the config
-
-The app will fetch this value and switch icons accordingly.
-
----
-
 ## 🧪 Customize & Add Icons
 
 ### 1. Add Icon Images
@@ -78,14 +85,18 @@ Each alias uses its own icon from these folders.
 Add `<activity-alias>` entries for each icon like:
 
 ```xml
-<activity-alias
-    android:name=".FestivalIcon"
-    android:enabled="false"
-    android:icon="@mipmap/ic_festival"
-    android:targetActivity=".MainActivity"
-    android:exported="true"
-    android:label="@string/app_name">
-</activity-alias>
+            <activity-alias
+                android:name=".MainActivityDefault"
+                android:enabled="true"
+                android:exported="true"
+                android:icon="@mipmap/ic_launcher"
+                android:label="IconSwitcherApp"
+                android:targetActivity=".MainActivity">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+            </activity-alias>
 ```
 
 Set only one alias `enabled=true` at a time.
@@ -104,29 +115,30 @@ MainActivity.kt & MainApplication.kt – Modified to properly register and integ
 
 ---
 
+
 ### 4. 🔥 Firebase Integration Summary
-We integrated Firebase into the project to enable remote dynamic icon switching functionality. Below are the key steps performed:
+Firebase enables remote delivery of icon and app name switching. Here's what was configured:
 
-Firebase Project Setup: A new Firebase project was created via the Firebase Console and the Android app was registered.
+🔐 SHA Keys: Added both SHA-1 and SHA-256 keys in Firebase Console
 
-SHA Keys Configuration: We added both the SHA-1 and SHA-256 keys from the development machine to enable authentication 
+📁 google-services.json: Downloaded and added to android/app/
 
-google-services.json File: The configuration file (google-services.json) was downloaded and placed under the android/app/ directory.
+⚙️ Gradle Setup: Applied Firebase plugins and dependencies in both root and app-level build.gradle
 
-Gradle Configuration: Firebase SDK was integrated by modifying build.gradle files:
+🌐 Remote Config: Keys like icon_name determine what alias is enabled
 
-Applied com.google.gms.google-services plugin.
 
-Added Firebase dependencies to support analytics.
 
 ---
 
-## ⚙️ How It Works
+### ⚙️ How It Works
+On app startup, Firebase Remote Config is fetched.
 
-- On app launch, Firebase Remote Config is fetched
-- The icon alias specified in the `icon_name` key is enabled
-- All other aliases are disabled
-- This switch happens via native Android code using the PackageManager
+The value of icon_name and app_label determine which alias to enable.
+
+The Kotlin module enables that alias and disables all others.
+
+The launcher icon and app name are updated immediately on Android.
 
 ---
 
