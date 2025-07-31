@@ -22,7 +22,7 @@ This is a React Native Android app that enables **dynamic app icon and app name 
 2. Select or create a Firebase project
 3. Navigate to **Remote Config**
 4. Add a new parameter:
-   - **Key**: `icon_name`
+   - **Key**: `app_icon`
    - **Value**: e.g., `MainActivityDefault`, `MainActivityPromo`, `MainActivityFestival` (must match alias names in manifest)
 5. Publish the config
 ---
@@ -124,11 +124,11 @@ Firebase enables remote delivery of icon and app name switching. Here's what was
 ### ⚙️ How It Works
 On app startup, Firebase Remote Config is fetched.
 
-The value of icon_name and app_label determine which alias to enable.
+The value of icon_app determine which alias to enable.
 
 The Kotlin module enables that alias and disables all others.
 
-The launcher icon and app name are updated immediately on Android.
+The launcher app icon and app name are updated immediately on Android.
 
 ---
 
