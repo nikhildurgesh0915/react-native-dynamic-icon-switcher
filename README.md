@@ -15,7 +15,6 @@ This is a React Native Android app that enables **dynamic app icon and app name 
 - 🔤 **Dynamic App Name Support**: App name displayed on launcher updates along with the icon.
 - 🔥 Built with React Native and integrated with Firebase.
 
----
 
 ## 🔧 Firebase Remote Config Setup
 
@@ -26,6 +25,7 @@ This is a React Native Android app that enables **dynamic app icon and app name 
    - **Key**: `icon_name`
    - **Value**: e.g., `MainActivityDefault`, `MainActivityPromo`, `MainActivityFestival` (must match alias names in manifest)
 5. Publish the config
+---
 
 ## 📖 Setup Instructions
 
