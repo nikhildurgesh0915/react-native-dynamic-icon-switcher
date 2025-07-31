@@ -34,16 +34,6 @@ This is a React Native Android app that enables **dynamic app icon and app name 
 ```bash
 git clone https://github.com/nikhildurgesh0915/react-native-dynamic-icon-switcher.git
 cd react-native-dynamic-icon-switcher
-
----
-
-## 📖 Setup Instructions
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/nikhildurgesh0915/react-native-dynamic-icon-switcher.git
-cd your-repo-name
 ```
 
 ### 2. Install Dependencies
