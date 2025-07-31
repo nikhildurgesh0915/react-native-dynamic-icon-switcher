@@ -115,7 +115,7 @@ Firebase enables remote delivery of icon and app name switching. Here's what was
 
 ⚙️ Gradle Setup: Applied Firebase plugins and dependencies in both root and app-level build.gradle
 
-🌐 Remote Config: Keys like icon_name determine what alias is enabled
+🌐 Remote Config: Keys like app_icon determine what alias is enabled
 
 
 
@@ -124,7 +124,7 @@ Firebase enables remote delivery of icon and app name switching. Here's what was
 ### ⚙️ How It Works
 On app startup, Firebase Remote Config is fetched.
 
-The value of icon_app determine which alias to enable.
+The value of app_icon determine which alias to enable.
 
 The Kotlin module enables that alias and disables all others.
 
