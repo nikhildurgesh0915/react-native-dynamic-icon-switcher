@@ -2,7 +2,8 @@
 
 This is a React Native Android app that allows **dynamic app icon switching remotely via Firebase Remote Config**. By using Firebase, you can control which launcher icon appears on users’ devices — without requiring a new app update or user interaction.
 
-> 📌 **Note**: This feature is supported **only on Android**, as iOS does not allow runtime icon switching.
+> 📌 **Note**: This feature is currently supported only on Android.
+iOS support is not available yet but will be implemented in future updates.
 
 ---
 
@@ -53,7 +54,7 @@ npx react-native run-android
 3. Navigate to **Remote Config**
 4. Add a new parameter:
    - **Key**: `icon_name`
-   - **Value**: e.g., `default_icon`, `festival_icon`, `sale_icon` (must match alias names in manifest)
+   - **Value**: e.g., `MainActivityDefault`, `MainActivityPromo`, `MainActivityFestival` (must match alias names in manifest)
 5. Publish the config
 
 The app will fetch this value and switch icons accordingly.
@@ -88,6 +89,35 @@ Add `<activity-alias>` entries for each icon like:
 ```
 
 Set only one alias `enabled=true` at a time.
+
+---
+
+### 3. Configure Kotlin Native Android Code
+🧩 Native Kotlin Setup Overview
+To enable dynamic icon switching on Android, we’ve integrated custom native logic using Kotlin:
+
+IconChangerModule.kt – Exposes a native module to JavaScript to trigger icon changes.
+
+IconChangerPackage.kt – Implements the core logic to enable or disable icon aliases using Android’s PackageManager.
+
+MainActivity.kt & MainApplication.kt – Modified to properly register and integrate the native module with React Native.
+
+---
+
+### 4. 🔥 Firebase Integration Summary
+We integrated Firebase into the project to enable remote dynamic icon switching functionality. Below are the key steps performed:
+
+Firebase Project Setup: A new Firebase project was created via the Firebase Console and the Android app was registered.
+
+SHA Keys Configuration: We added both the SHA-1 and SHA-256 keys from the development machine to enable authentication 
+
+google-services.json File: The configuration file (google-services.json) was downloaded and placed under the android/app/ directory.
+
+Gradle Configuration: Firebase SDK was integrated by modifying build.gradle files:
+
+Applied com.google.gms.google-services plugin.
+
+Added Firebase dependencies to support analytics.
 
 ---
 
