@@ -6,6 +6,7 @@ This is a React Native Android app that enables **dynamic app icon and app name 
 > iOS support is not available yet but will be implemented in future updates.
 
 ---
+<img width="6250" height="4166" alt="image" src="https://github.com/user-attachments/assets/f8507291-9556-4af5-9b9f-39310860c156" />
 
 ## ✨ Features
 
@@ -26,6 +27,7 @@ This is a React Native Android app that enables **dynamic app icon and app name 
    - **Value**: e.g., `MainActivityDefault`, `MainActivityPromo`, `MainActivityFestival` (must match alias names in manifest)
 5. Publish the config
 ---
+<img width="3544" height="2234" alt="image" src="https://github.com/user-attachments/assets/f24b670f-a685-4204-b388-be00b6ba85dd" />
 
 ## 📖 Setup Instructions
 
